@@ -10,7 +10,8 @@ This lab is from PortSwigger Web Security Academy and demonstrates a classic IDO
 
 I started by using the Live Chat feature and sent a normal message.
 
-Then I clicked: 👉 View transcript
+Then I clicked:
+👉 View transcript
 
 ⸻
 
@@ -18,10 +19,13 @@ Then I clicked: 👉 View transcript
 
 The application generated the following request:
 
+```http
 GET /download-transcript/2.txt
+```
 Using Burp Suite, I noticed:
 
-• The application uses a numeric ID • No authorization validation is implemented
+ • The application uses a numeric ID
+ • No authorization validation is implemented
 
 ⸻
 
@@ -29,49 +33,57 @@ Using Burp Suite, I noticed:
 
 I modified the ID in the URL:
 
+```http
 GET /download-transcript/1.txt
+```
 ⸻
 
 💥 Step 4 – Result
 
 The request succeeded:
 
-I accessed another user’s transcript
-No access control was enforced
+ - I accessed another user’s transcript
+ - No access control was enforced
+
 ⸻
 
 🔐 Step 5 – Impact (Lab Scenario)
 
 Inside the transcript:
 
-Sensitive data was exposed
-User credentials were visible
+ - Sensitive data was exposed
+ - User credentials were visible
+
 This allowed me to log into the victim’s account.
+
 
 ⸻
 
 🧠 Root Cause
 
-Missing access control checks
-Direct use of user-controlled input (ID)
-No validation of resource ownership
+ - Missing access control checks
+ - Direct use of user-controlled input (ID)
+ - No validation of resource ownership
+
 👉 This leads to Broken Access Control (IDOR)
 
 ⸻
 
 💣 Impact
 
-Unauthorized access to user data
-Sensitive information disclosure
-Account takeover (within lab environment)
+ - Unauthorized access to user data
+ - Sensitive information disclosure
+ - Account takeover (within lab environment)
+
 ⸻
 
 🛡️ Mitigation
 
-Enforce authorization on every request
-Validate user ownership
-Avoid predictable identifiers
-Use indirect references (UUIDs)
+ - Enforce authorization on every request
+ - Validate user ownership
+ - Avoid predictable identifiers
+ - Use indirect references (UUIDs)
+
 ⸻
 
 🎯 Key Takeaway
@@ -90,6 +102,5 @@ This test was conducted in a legal lab environment (PortSwigger Web Security Aca
 
 👨‍💻 Author
 
-Ahmed Khader 
-
-Cybersecurity | Penetration Tester
+Ahmed Khader
+Cybersecurity | Penetration Tester 
