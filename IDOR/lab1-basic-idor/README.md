@@ -1,21 +1,24 @@
-🔓 Lab: Insecure Direct Object References (IDOR)
+# 🔓 Lab: Insecure Direct Object References (IDOR)
 
-🚀 Overview
+## 🚀 Overview
 
 This lab is from PortSwigger Web Security Academy and demonstrates a classic IDOR (Insecure Direct Object Reference) vulnerability caused by missing access control checks.
 
 ⸻
 
-🧪 Step 1 – Interacting with the application
+## 🧪 Step 1 – Interacting with the application
 
 I started by using the Live Chat feature and sent a normal message.
 
 Then I clicked:
 👉 View transcript
 
+### 📸 Screenshot
+![Step 1](assets/images/step1.png)
+
 ⸻
 
-🔍 Step 2 – Observing the request
+## 🔍 Step 2 – Observing the request
 
 The application generated the following request:
 
@@ -24,60 +27,71 @@ GET /download-transcript/2.txt
 ```
 Using Burp Suite, I noticed:
 
- • The application uses a numeric ID
- • No authorization validation is implemented
+- The application uses a numeric ID
+- No authorization validation is implemented
+
+### 📸 Screenshot
+![Step 2](assets/images/step2.png)
 
 ⸻
 
-🤔 Step 3 – Testing ID manipulation
+## 🤔 Step 3 – Testing ID manipulation
 
 I modified the ID in the URL:
 
 ```http
 GET /download-transcript/1.txt
 ```
+### 📸 Screenshot
+![Step 3](assets/images/step3.png)
+
 ⸻
 
-💥 Step 4 – Result
+## 💥 Step 4 – Result
 
 The request succeeded:
 
- - I accessed another user’s transcript
- - No access control was enforced
+- I accessed another user’s transcript
+- No access control was enforced
+
+### 📸 Screenshot
+![Step 4](assets/images/step4.png)
 
 ⸻
 
-🔐 Step 5 – Impact (Lab Scenario)
+## 🔐 Step 5 – Impact (Lab Scenario)
 
 Inside the transcript:
 
- - Sensitive data was exposed
- - User credentials were visible
+- Sensitive data was exposed
+- User credentials were visible
 
 This allowed me to log into the victim’s account.
 
+### 📸 Screenshot
+![Step 5](assets/images/step5.png)
 
 ⸻
 
-🧠 Root Cause
+## 🧠 Root Cause
 
- - Missing access control checks
- - Direct use of user-controlled input (ID)
- - No validation of resource ownership
+- Missing access control checks
+- Direct use of user-controlled input (ID)
+- No validation of resource ownership
 
 👉 This leads to Broken Access Control (IDOR)
 
 ⸻
 
-💣 Impact
+## 💣 Impact
 
- - Unauthorized access to user data
- - Sensitive information disclosure
- - Account takeover (within lab environment)
+- Unauthorized access to user data
+- Sensitive information disclosure
+- Account takeover (within lab environment)
 
 ⸻
 
-🛡️ Mitigation
+## 🛡️ Mitigation
 
  - Enforce authorization on every request
  - Validate user ownership
@@ -86,7 +100,7 @@ This allowed me to log into the victim’s account.
 
 ⸻
 
-🎯 Key Takeaway
+## 🎯 Key Takeaway
 
 If user input controls access to resources:
 
@@ -94,13 +108,13 @@ If user input controls access to resources:
 
 ⸻
 
-⚠️ Disclaimer
+## ⚠️ Disclaimer
 
 This test was conducted in a legal lab environment (PortSwigger Web Security Academy) for educational purposes only.
 
 ⸻
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 Ahmed Khader
 Cybersecurity | Penetration Tester 
