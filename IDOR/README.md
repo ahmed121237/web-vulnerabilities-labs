@@ -42,8 +42,8 @@ GET /download-transcript/1.txt
 
 The request succeeded:
 
- • I accessed another user’s transcript
- • No access control was enforced
+ - I accessed another user’s transcript
+ - No access control was enforced
 
 ⸻
 
@@ -51,8 +51,8 @@ The request succeeded:
 
 Inside the transcript:
 
- • Sensitive data was exposed
- • User credentials were visible
+ - Sensitive data was exposed
+ - User credentials were visible
 
 This allowed me to log into the victim’s account.
 
@@ -61,9 +61,9 @@ This allowed me to log into the victim’s account.
 
 🧠 Root Cause
 
- • Missing access control checks
- • Direct use of user-controlled input (ID)
- • No validation of resource ownership
+ - Missing access control checks
+ - Direct use of user-controlled input (ID)
+ - No validation of resource ownership
 
 👉 This leads to Broken Access Control (IDOR)
 
@@ -71,18 +71,18 @@ This allowed me to log into the victim’s account.
 
 💣 Impact
 
- • Unauthorized access to user data
- • Sensitive information disclosure
- • Account takeover (within lab environment)
+ - Unauthorized access to user data
+ - Sensitive information disclosure
+ - Account takeover (within lab environment)
 
 ⸻
 
 🛡️ Mitigation
 
- • Enforce authorization on every request
- • Validate user ownership
- • Avoid predictable identifiers
- • Use indirect references (UUIDs)
+ - Enforce authorization on every request
+ - Validate user ownership
+ - Avoid predictable identifiers
+ - Use indirect references (UUIDs)
 
 ⸻
 
