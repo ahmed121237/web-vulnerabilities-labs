@@ -1,46 +1,98 @@
+🔓 Lab: Insecure Direct Object References (IDOR)
 
-# 🔐 Web Security Vulnerabilities Portfolio
+🚀 Overview
 
-🚀 Hands-on web security labs with real exploitation techniques.
+This lab is from PortSwigger Web Security Academy and demonstrates a classic IDOR (Insecure Direct Object Reference) vulnerability caused by missing access control checks.
 
----
+⸻
 
-## 👨‍💻 About Me
+🧪 Step 1 – Interacting with the application
 
-Cybersecurity enthusiast focused on penetration testing and bug bounty.
+I started by using the Live Chat feature and sent a normal message.
 
----
+Then I clicked:
+👉 View transcript
 
-## 📂 Vulnerabilities
+⸻
 
-### 🔓 IDOR (Insecure Direct Object Reference)
+🔍 Step 2 – Observing the request
 
-- Exploited by modifying object IDs  
-- Accessed unauthorized data  
-- Performed account takeover  
+The application generated the following request:
 
-👉 View Full Lab
+GET /download-transcript/2.txt
 
----
+Using Burp Suite, I noticed:
+	•	The application uses a numeric ID
+	•	No authorization validation is implemented
 
-## 🛠 Tools Used
+⸻
 
-- Burp Suite  
-- Manual Testing  
+🤔 Step 3 – Testing ID manipulation
 
----
+I modified the ID in the URL:
 
-## 📸 Demo
+/download-transcript/1.txt
 
-Demo
+⸻
 
----
+💥 Step 4 – Result
 
-## 🎯 Goal
+The request succeeded:
+	•	I accessed another user’s transcript
+	•	No access control was enforced
 
-Build real-world pentesting skills and document vulnerabilities professionally.
+⸻
 
----
+🔐 Step 5 – Impact (Lab Scenario)
 
-## 👨‍💻 Author  
+Inside the transcript:
+	•	Sensitive data was exposed
+	•	User credentials were visible
+
+This allowed me to log into the victim’s account.
+
+
+⸻
+
+🧠 Root Cause
+	•	Missing access control checks
+	•	Direct use of user-controlled input (ID)
+	•	No validation of resource ownership
+
+👉 This leads to Broken Access Control (IDOR)
+
+⸻
+
+💣 Impact
+	•	Unauthorized access to user data
+	•	Sensitive information disclosure
+	•	Account takeover (within lab environment)
+
+⸻
+
+🛡️ Mitigation
+	•	Enforce authorization on every request
+	•	Validate user ownership
+	•	Avoid predictable identifiers
+	•	Use indirect references (UUIDs)
+
+⸻
+
+🎯 Key Takeaway
+
+If user input controls access to resources:
+
+👉 It must always be validated.
+
+⸻
+
+⚠️ Disclaimer
+
+This test was conducted in a legal lab environment (PortSwigger Web Security Academy) for educational purposes only.
+
+⸻
+
+👨‍💻 Author
+
 Ahmed Khader
+Cybersecurity | Penetration Tester 
