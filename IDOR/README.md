@@ -19,9 +19,10 @@ Then I clicked:
 
 The application generated the following request:
 
-GET /download-transcript/2.txt
+`GET /download-transcript/2.txt`
 
 Using Burp Suite, I noticed:
+
 	•	The application uses a numeric ID
 	•	No authorization validation is implemented
 
@@ -31,13 +32,13 @@ Using Burp Suite, I noticed:
 
 I modified the ID in the URL:
 
-/download-transcript/1.txt
-
+`/download-transcript/1.txt`
 ⸻
 
 💥 Step 4 – Result
 
 The request succeeded:
+
 	•	I accessed another user’s transcript
 	•	No access control was enforced
 
@@ -46,6 +47,7 @@ The request succeeded:
 🔐 Step 5 – Impact (Lab Scenario)
 
 Inside the transcript:
+
 	•	Sensitive data was exposed
 	•	User credentials were visible
 
@@ -55,6 +57,7 @@ This allowed me to log into the victim’s account.
 ⸻
 
 🧠 Root Cause
+
 	•	Missing access control checks
 	•	Direct use of user-controlled input (ID)
 	•	No validation of resource ownership
@@ -64,6 +67,7 @@ This allowed me to log into the victim’s account.
 ⸻
 
 💣 Impact
+
 	•	Unauthorized access to user data
 	•	Sensitive information disclosure
 	•	Account takeover (within lab environment)
@@ -71,6 +75,7 @@ This allowed me to log into the victim’s account.
 ⸻
 
 🛡️ Mitigation
+
 	•	Enforce authorization on every request
 	•	Validate user ownership
 	•	Avoid predictable identifiers
